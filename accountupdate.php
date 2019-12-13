@@ -50,8 +50,9 @@
 			<form action="gallery.php">
 			<button id="info" onclick="change_field()" class="btn">close</button>
 			</form>
+			<input type="checkbox" name="emailcomment" value="Bo" checked> I Would like to recieve email notifications for comments
 	</section>
 
 </body>
-
 </html>
+<?php require "footer.php"; ?>

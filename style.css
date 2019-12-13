@@ -14,6 +14,13 @@ body{
     transform: translate(-50%, -50%);
     color: black;
 }  
+.footer{
+  float: bottom;
+}
+
+.footer p {
+  float: right;
+}
 
 .login-box p {
     color: red;
@@ -70,9 +77,9 @@ body{
 }
 /* ################### Gallery #############################  */
 .gallery {
-	width: 300px;
-	margin: 0 auto 30px;
-	overflow: hidden;
+  width: 300px;
+	margin: 0 auto;
+	/* overflow: hidden; */
 
 }
 .gallery div {

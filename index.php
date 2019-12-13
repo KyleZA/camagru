@@ -1,7 +1,8 @@
 <?php 
-session_unset();
-session_destroy();
 require "header.php"; 
+
+include "config/database.php";
+include "config/setup.php";
 ?>
 <!DOCTYPE html>
 <html>

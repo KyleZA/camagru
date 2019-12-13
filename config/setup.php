@@ -18,6 +18,14 @@ try {
 		`verification_code` varchar(264) NOT NULL
 		);";
 	$conn->exec($sql);
+	
+	$sql = "CREATE TABLE IF NOT EXISTS `images`(
+        `image_id` INT(11) AUTO_INCREMENT PRIMARY KEY NOT NULL,
+        `image_src` TEXT NOT NULL,
+        `user_id` INT(11),
+        FOREIGN KEY (`user_id`) REFERENCES `users`(`user_id`)
+        );";
+    $conn->exec($sql);
 }
 catch(PDOException $e) {
     	echo $sql . "<br>" . $e->getMessage();
