@@ -6,14 +6,21 @@ $user_id = $_SESSION['userId'];
 //$email = $_SESSION['email'];
 $sql = "SELECT * FROM `images` ORDER BY image_id DESC";
 $stmt = $conn->prepare($sql);
+$stmt1 = $conn->prepare($sql);
 // $stmt->bindParam(":userId", $user_id);
 $stmt->execute();
+$stmt1->execute();
 $count = $stmt->rowCount();
 if ($count > 0) {
     $result = $stmt->fetchAll(PDO::FETCH_COLUMN, 1);
+    $image_id = $stmt1->fetchAll(PDO::FETCH_COLUMN, 0);
+    $total = count($result);
     // $username = $result['image_src'];
 }
-$total = count($result);
+else
+{
+    $total = 0;
+}
 ?>
 <!DOCTYPE html>
 <HTML>
@@ -51,57 +58,19 @@ $total = count($result);
     <div class="gallery">
 			<h2>Thumbnail</h2>
 			<?php
-			$i = 0;
+            $i = 0;
 			while ($i < $total)
 			{ ?>
 				<img style ="float:center; margin: auto; margin-top: 20px; border-radius: 10px;" src="<?php echo $result[$i]; ?>">
-				<!-- <form>
-				<textarea rows="4" cols="50" name="comment" form="usrform">
-				<button id="comment" type="submit" name="comments">Comment here</button> 
-				</form> -->
-			<?php $i++;} ?>
+                <form action='includes/delete.inc.php' method="post">
+                <input type="hidden" name="img_id" value="<?php echo $image_id[$i];?>">
+                <button type="submit" name="delete_image" style="btn">Delete</button>
+                </form>
+            <?php 
+            $i++;
+            } 
+            ?>
 		</div>
-<!-- <script>
-    'use strict';
-    const video = document.getElementById('video');
-    const canvas = document.getElementById('canvas');
-    const snap = document.getElementById('snap');
-    const errorMsgElement = document.getElementById('span#ErrorMsg');
-    const constraints = 
-    {
-        audio: false,
-        video:
-        {
-            width: 640, height: 400
-        }
-    };
-// Access webcam
-    async function init ()
-    {
-        try{
-            const stream = await navigator.mediaDevices.getUserMedia(constraints);
-            handleSuccess(stream);
-        }
-        catch(e)
-        {
-            errorMsgElement.innerHTML = `navigator.getUserMedia.error:${e.toString()}`;
-        }
-    }
-//Success
-    function handleSuccess(stream)
-    {
-        window.stream = stream
-        video.srcObject = stream;
-    }
-// Load init
-    init()
-// Draw image
-    var context = canvas.getContext('2d');
-    snap.addEventListener("click", function()
-    {
-        context.drawImage(video, 0, 0, 640, 400);
-    });
-</script> -->
 <script type="text/javascript" async src="js/photo.js"></script>
 <br>
 </body>
